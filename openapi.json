@@ -2,9 +2,15 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Lightning QR API",
-        "description": "High-performance, lightweight QR code generation API with advanced styling and logo support.",
+        "description": "High-performance, lightweight QR code generation API with advanced styling and customization.",
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "https://lightning-qr.vercel.app",
+            "description": "Production Server"
+        }
+    ],
     "paths": {
         "/generate": {
             "get": {
@@ -29,27 +35,50 @@
                                 "svg"
                             ],
                             "default": "png"
-                        }
+                        },
+                        "description": "Output format (png or svg)"
                     },
                     {
                         "name": "size",
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "default": 300
-                        }
+                            "default": 300,
+                            "minimum": 50,
+                            "maximum": 2000
+                        },
+                        "description": "Width/Height of the QR code in pixels"
                     },
                     {
-                        "name": "theme",
+                        "name": "margin",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 4,
+                            "minimum": 0,
+                            "maximum": 20
+                        },
+                        "description": "Quiet zone size around the QR code"
+                    },
+                    {
+                        "name": "color_dark",
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "modern",
-                                "cyberpunk",
-                                "classic"
-                            ]
-                        }
+                            "default": "#000000",
+                            "pattern": "^#[0-9a-fA-F]{6}$"
+                        },
+                        "description": "Hex color for the dark modules (e.g. #000000)"
+                    },
+                    {
+                        "name": "color_light",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "default": "#ffffff",
+                            "pattern": "^#[0-9a-fA-F]{6}$"
+                        },
+                        "description": "Hex color for the light background (e.g. #ffffff)"
                     }
                 ],
                 "responses": {
@@ -58,6 +87,30 @@
                         "content": {
                             "image/png": {},
                             "image/svg+xml": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "details": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
