@@ -18,13 +18,9 @@
   ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+ "dependencies": {
     "@fastify/cors": "^11.2.0",
-    "@loskir/styled-qr-code-node": "^1.5.2",
-    "canvas": "^3.2.1",
     "fastify": "^4.26.1",
-    "jsdom": "^27.4.0",
-    "qr-code-styling": "^1.9.2",
     "qrcode": "^1.5.3",
     "zod": "^3.22.4"
   },
