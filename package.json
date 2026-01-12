@@ -1,12 +1,13 @@
 {
   "name": "lightning-qr",
   "version": "1.0.0",
+  "type": "module",
   "description": "High-performance, lightweight QR code generation API",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "test": "vitest",
     "bench": "tsx scripts/bench.ts"
   },
