@@ -1,0 +1,89 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Lightning QR API",
+        "description": "High-performance, lightweight QR code generation API with advanced styling and logo support.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/generate": {
+            "get": {
+                "summary": "Generate a QR code",
+                "parameters": [
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The content to encode"
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "png",
+                                "svg"
+                            ],
+                            "default": "png"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 300
+                        }
+                    },
+                    {
+                        "name": "theme",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "modern",
+                                "cyberpunk",
+                                "classic"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "QR Code image",
+                        "content": {
+                            "image/png": {},
+                            "image/svg+xml": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "summary": "Health check",
+                "responses": {
+                    "200": {
+                        "description": "Service status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
