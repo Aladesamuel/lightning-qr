@@ -1,10 +1,8 @@
 import QRCode from 'qrcode';
 import { GenerateQRParams } from './schemas.js';
 export async function generateQR(params: GenerateQRParams): Promise<{ buffer: Buffer | string; type: string }> {
-    const options: any = {
+    const options: QRCode.QRCodeToDataURLOptions | QRCode.QRCodeToBufferOptions = {
         errorCorrectionLevel: 'M',
-        type: params.format === 'svg' ? 'svg' : 'png',
-        quality: 0.92,
         margin: params.margin,
         width: params.size,
         color: {
